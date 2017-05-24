@@ -1,11 +1,10 @@
-from datetime import datetime as dt
 import time
 from threading import Timer
 import subprocess
 import webbrowser
 import smtplib
 from tkinter import *
-from tkinter import ttk
+
 
 class Open_Web:
   def __init__(self, time,page):
@@ -20,7 +19,7 @@ class Open_File:
     self.file=file
     self.programm=programm
   def run_on_time(self):
-    Timer(self.time.timestamp()-time.time(), subprocess.run, args=((self.programm, self.file),),
+    Timer(self.time.timestamp()-time.time(), subprocess.run, args=((self.programm, self.file, self.file),),
     kwargs={'shell':True}).start()
 
 
@@ -53,14 +52,16 @@ class Open_Message:
     root.title('Ξεχασιάρης')
     labelfont = ('times', 20, 'bold')
     mainframe=Frame(root, borderwidth=5)
-    mainframe.grid(row=0,column=0)
-    label1=Label(mainframe,text=self.message, font=labelfont)
-    label1.config(bg='black', fg='yellow', relief=RAISED)
-    label1.pack(expand=YES, fill=BOTH) 
-    
+    mainframe.pack(expand=YES, fill=BOTH)
+    message1=Message(mainframe,text=self.message, font=labelfont)
+    message1.config(bg='black', fg='yellow', relief=RAISED)
+    message1.pack(expand=YES, fill=BOTH) 
+    button=Button(root,text='Το διάβασα', command=root.destroy)
+    button.pack(expand=YES, fill=X) 
+    root.focus_set()
   def run_on_time(self):
     Timer(self.time.timestamp()-time.time(), self.grafic).start()  
- 
+
 class Save:
   object_file=[]
   def save_object(self,object):
