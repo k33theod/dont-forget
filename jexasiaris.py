@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter.filedialog import askopenfilename
 import calendar
-from run_app_classes import *
+from jexasiaris_classes import *
 
 
 class Jexasiaris(ttk.Frame):
