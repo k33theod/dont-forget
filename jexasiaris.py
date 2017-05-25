@@ -101,7 +101,7 @@ class Jexasiaris(ttk.Frame):
     label2=Label(self.mail_win, text='mail_to_send')
     self.entry_mail2=Entry(self.mail_win, width=60)  
     label3=Label(self.mail_win, text='password')
-    self.entry_mail3=Entry(self.mail_win, width=60)
+    self.entry_mail3=Entry(self.mail_win, width=60, show='*')
     label4=Label(self.mail_win, text='message')
     self.entry_mail4=Entry(self.mail_win, width=60)
     label1.grid(column=0, row=0)
