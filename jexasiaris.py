@@ -4,7 +4,7 @@ from tkinter import ttk
 from tkinter.filedialog import askopenfilename
 import calendar
 from jexasiaris_classes import *
-
+#If i close the mainwindow  tasks webbrowser and fileopen are running normal
 
 class Jexasiaris(ttk.Frame):
   def __init__(self, parent=None,**kwargs):
@@ -13,31 +13,37 @@ class Jexasiaris(ttk.Frame):
     self.pack(expand=YES, fill=BOTH)
     self.add_children()
     self.configure_layout()
-    
+    load_from_saved()
+    #self.current_time()
+  
   def add_children(self):
     s=ttk.Style()
     #s.theme_use('clam')
-    s.configure('mm.TButton',font=(12), padding=3)
+    s.configure('TButton',font=(12), padding=5)
     label1=ttk.Label(self,text='Aνοίξτε έγγραφα, ιστοσελίδες, δέστε μυνήματα\n\
 στείλτε εμαιλ την ώρα που θέλετε',font='12')
-    label1.grid(row=0,columnspan=4, padx=5, pady=5)
+    label1.grid(row=0,columnspan=2, padx=5, pady=5)
     label2=ttk.Label(self,text='Όρισε το χρόνο εκτέλεσης', font='12')
     label2.grid(row=1,column=0, columnspan=2, padx=5, pady=5)
+    self.label3=ttk.Label(self,text=dt.now().ctime(), font='12')
+    self.label3.grid(row=0,column=2, columnspan=2, padx=5, pady=5)
     self.entry1=ttk.Entry(self, width=30,font=('12'))
     self.entry1.insert(0,dt.now())
     self.entry1.grid(row=1, column=2,columnspan=2)
     buttons_frame=ttk.Frame(self)
     buttons_frame.grid(row=2,column=0, columnspan=4)
-    button1=ttk.Button(buttons_frame,text='Επιλογή Αρχείου', style='mm.TButton', command=self.file)
+    button1=ttk.Button(buttons_frame,text='Επιλογή Αρχείου',command=self.file)
     button1.grid(row=2, column=0)
-    button2=ttk.Button(buttons_frame,text='Ιστοσελίδα', command=self.open_web_modal,style='mm.TButton' )
+    button2=ttk.Button(buttons_frame,text='Ιστοσελίδα', command=self.open_web_modal)
     button2.grid(row=2,column=1)
-    button3=ttk.Button(buttons_frame,text='Μύνημα', command=self.minima_window, style='mm.TButton')
+    button3=ttk.Button(buttons_frame,text='Μύνημα', command=self.minima_window)
     button3.grid(row=2,column=2)
-    button4=ttk.Button(buttons_frame,text='email', command=self.mail_widget, style='mm.TButton')
+    button4=ttk.Button(buttons_frame,text='email', command=self.mail_widget)
     button4.grid(row=2,column=3)
-    button6=ttk.Button(buttons_frame,text='Ημερολόγιο', command=self.calend, style='mm.TButton')
+    button6=ttk.Button(buttons_frame,text='Ημερολόγιο', command=self.calend)
     button6.grid(row=3,column=0)
+    button7=ttk.Button(buttons_frame,text='καθαρισμός παλιών μυνημάτων', command=delete_alt_objects)
+    button7.grid(row=3,column=3)
   
   def configure_layout(self):
     self.columnconfigure(0, weight=1)
@@ -52,7 +58,8 @@ class Jexasiaris(ttk.Frame):
     filename=askopenfilename()
     file_obj=Open_File(self.xronos(),filename)
     file_obj.run_on_time()
-
+    #When the filedialog opens if i close it with x a new file window comes up with no buttons_frame
+    #at bottom to get a file. Happens not always
   def istoselida(self):
     selida=self.entry3.get()
     istoselida_obj=Open_Web(self.xronos(),selida)
@@ -60,7 +67,7 @@ class Jexasiaris(ttk.Frame):
     istoselida_obj.run_on_time()
   
   def open_web_modal(self):
-    self.win_web = Toplevel() # make a new window
+    self.win_web = Toplevel()
     label=Label(self.win_web, text='Δώσε την ιστοσελίδα', font=(12))
     label.pack(side=TOP)
     self.entry3=Entry(self.win_web, width=30, font=(12))
@@ -131,11 +138,15 @@ class Jexasiaris(ttk.Frame):
   def xronos(self):
     str_time=self.entry1.get()
     time=dt.strptime(str_time,"%Y-%m-%d %H:%M:%S.%f")
-    return time  
+    return time 
+  
+  def current_time(self):
+    self.label3.configure(text=dt.now().ctime())
+    self.label3.after(10,self.current_time)
+  
 
 if __name__=='__main__': 
   a=Tk()
   a.title('Ξεχασιάρης')
   b=Jexasiaris(a)
   a.mainloop()
-
