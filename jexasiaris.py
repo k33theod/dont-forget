@@ -25,8 +25,8 @@ class Jexasiaris(ttk.Frame):
     label1.grid(row=0,columnspan=2, padx=5, pady=5)
     label2=ttk.Label(self,text='Όρισε το χρόνο εκτέλεσης', font='12')
     label2.grid(row=1,column=0, columnspan=2, padx=5, pady=5)
-    self.label3=ttk.Label(self,text=dt.now().ctime(), font='12')
-    self.label3.grid(row=0,column=2, columnspan=2, padx=5, pady=5)
+    #self.label3=ttk.Label(self,text=dt.now().ctime(), font='12')
+    #self.label3.grid(row=0,column=2, columnspan=2, padx=5, pady=5)
     self.entry1=ttk.Entry(self, width=30,font=('12'))
     self.entry1.insert(0,dt.now())
     self.entry1.grid(row=1, column=2,columnspan=2)
@@ -81,7 +81,7 @@ class Jexasiaris(ttk.Frame):
     minima_obj=Open_Message(self.xronos(),minima)
     self.top_minima.destroy()
     minima_obj.run_on_time()
-  
+    
   def minima_window(self):
     self.top_minima=Toplevel()
     self.top_minima.title('Δώσε Μύνημα')
@@ -90,14 +90,14 @@ class Jexasiaris(ttk.Frame):
     button=Button(self.top_minima, text='ok',font=('12'),command=self.read_entry_minima)
     button.pack()
     self.entry2.focus_set()
-   
+  
   def email(self):
     mail_obj=Send_Email(self.xronos(),self.entry_mail1.get(),
     self.entry_mail5.get(),self.entry_mail2.get(),self.entry_mail3.get(),
     self.entry_mail4.get())
     mail_obj.run_on_time()
     self.mail_win.destroy()
-   
+  
   def mail_widget(self):
     entries=['mail_login', 'mail_to_send' , 'password', 'message']
     self.mail_win=Toplevel()
@@ -125,7 +125,7 @@ class Jexasiaris(ttk.Frame):
     self.entry_mail5.insert(0,'Το username σας')
     button_ok=Button(self.mail_win, text='Έτοιμος', command=self.email)
     button_ok.grid(column=0, row=5, columnspan=2)
-   
+  
   def calend(self):
     a=calendar.TextCalendar()
     b=Toplevel()
@@ -140,9 +140,9 @@ class Jexasiaris(ttk.Frame):
     time=dt.strptime(str_time,"%Y-%m-%d %H:%M:%S.%f")
     return time 
   
-  def current_time(self):
-    self.label3.configure(text=dt.now().ctime())
-    self.label3.after(10,self.current_time)
+  #def current_time(self):
+    #self.label3.configure(text=dt.now().ctime())
+    #self.label3.after(10,self.current_time)
   
 
 if __name__=='__main__': 
