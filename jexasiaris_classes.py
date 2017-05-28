@@ -68,17 +68,17 @@ class Open_Message:
 
 def save_obj(obj):
   obj_f=shelve.open('jexasiaris')
-  try: 
-    lista=obj_f['lista']
-  except:
-    obj_f['lista']=[]
-    lista=obj_f['lista']
+  lista=obj_f['lista']
   lista.append(obj)
   obj_f['lista']=lista
   obj_f.close()
   
 def load_from_saved():
   obj_f=shelve.open('jexasiaris')
+  try: 
+    lista=obj_f['lista']
+  except:
+    obj_f['lista']=[]
   lista=obj_f['lista']
   for obj in lista:
     obj.run_on_time()
