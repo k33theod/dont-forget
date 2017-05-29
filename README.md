@@ -14,4 +14,6 @@ In case the programm doesn't respond you can run it through python indle to get 
 
 Some email providers doesn't allow "programms" to login and use email services for security reasons. If this is the case you normally get a warning to your email acount.
 
+known bug ? : If you try to open more than on files from the same type and your default opening application doesnt support tabs you will get only the last one. The program wont create a new window instead will load the new file in aleady existing one.
+
 Author: k33theod@gmail.com
