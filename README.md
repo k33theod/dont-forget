@@ -3,7 +3,7 @@
 This program acts as a reminder through messages, opening files, web pages and sending emails
 
 The first you have to do is to change the given time entry to the time you want the action to take place !!!Do not change the time format
-Second pick an action from file, message, webpage, email and fill the fields.
+Second pick an action from file, message, webpage, email and fill in the fields.
 In normal the required action will spawn at the time you want
 
 Calendar button just pops up a window with current year calendar
